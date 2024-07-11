@@ -5,42 +5,39 @@ import { useToast } from "../contexts/ToastContext";
 
 interface UseApiProps {
   method: "POST" | "GET" | "PUT" | "PATCH" | "DELETE";
-  queryParams?: string;
+  route: string;
   payload?: any;
 }
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
-const useApi = ({ method, queryParams = "", payload = null }: UseApiProps) => {
+const useApi = () => {
   const { showToast } = useToast();
   const [responseData, setResponseData] = useState<any>(null);
 
-  const apiCall = async (dynamicQueryParams = queryParams, dynamicPayload = payload) => {
+  const apiCall = async ({ method, route, payload }: UseApiProps) => {
     try {
       const token = localStorage.getItem("token");
-      if (!token) {
-        throw new Error("No token found");
-      }
 
-      const url = `${API_BASE_URL}${dynamicQueryParams}`;
+      const url = `${API_BASE_URL}${route}`;
       const options: RequestInit = {
         method,
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`
+          ...(token && { Authorization: `Bearer ${token}` }) // Conditionally add the Authorization header
         }
       };
 
-      if (dynamicPayload) {
-        options.body = JSON.stringify(dynamicPayload);
+      if (payload) {
+        options.body = JSON.stringify(payload);
       }
 
       const response = await fetch(url, options);
 
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        const errorText = await response.text();
+        throw new Error(`Network response was not ok: ${response.status} ${response.statusText} - ${errorText}`);
       }
-
       const data = await response.json();
       setResponseData(data);
       return data;

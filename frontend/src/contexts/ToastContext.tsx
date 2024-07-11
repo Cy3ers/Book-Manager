@@ -25,7 +25,7 @@ const ToastProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     setToastMessage(message);
     setTimeout(() => {
       setToastMessage(null);
-    }, 3000); // Toast disappears after 3 seconds
+    }, 5000); // Toast disappears after 5 seconds
     // showBoundary("Error");
     // throw new Error("Error");
   };

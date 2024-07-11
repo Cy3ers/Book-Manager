@@ -11,14 +11,11 @@ const AdminDashboard: React.FC = () => {
   const navigate = useNavigate();
   const { showToast } = useToast();
 
-  const { apiCall: fetchTasks, responseData: tasks } = useApi({
-    method: "GET",
-    queryParams: "/tasks"
-  });
+  const { apiCall, responseData: tasks } = useApi();
 
-  const { apiCall: deleteTask } = useApi({
-    method: "DELETE"
-  });
+  const fetchTasks = async () => {
+    await apiCall({ method: "GET", route: "/tasks" });
+  };
 
   useEffect(() => {
     fetchTasks();
@@ -26,9 +23,11 @@ const AdminDashboard: React.FC = () => {
   }, []);
 
   const handleDeleteTask = async (id: number) => {
-    await deleteTask(`/tasks/${id}`);
-    fetchTasks(); // Refresh the task list after deletion
+    console.log("Before");
+    await apiCall({ method: "DELETE", route: `/tasks/${id}` });
+    fetchTasks();
     showToast("Task deleted successfully!");
+    console.log("After");
   };
   return (
     <div>

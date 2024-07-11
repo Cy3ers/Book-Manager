@@ -77,8 +77,7 @@ router.post("/", authMiddleware, (req: AuthRequest, res: Response) => {
   // }
 
   writeTaskData(taskData);
-  res.status(201);
-  //.send(newTask);
+  res.status(201).send(newTask);
 });
 
 router.get("/", authMiddleware, (req, res) => {
@@ -155,8 +154,7 @@ router.delete("/:id", authMiddleware, (req: AuthRequest, res: Response) => {
   // }
 
   writeTaskData(taskData);
-  res.status(200);
-  //.send(task);
+  res.status(200).send("task deleted successfully");
 });
 
 export default router;

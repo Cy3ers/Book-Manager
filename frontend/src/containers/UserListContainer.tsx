@@ -3,29 +3,31 @@
 import React, { useState, useEffect } from "react";
 import UserList from "../components/UserList";
 import { useToast } from "../contexts/ToastContext";
-import { registerUser, deleteUser, getUsers } from "../api/api";
 import { User } from "../types";
+import useApi from "../hooks/useApi";
 
 const UserListContainer: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
   const { showToast } = useToast();
+  const { apiCall } = useApi();
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const fetchedUsers = await getUsers();
+      const fetchedUsers = await apiCall({ method: "GET", route: "/users" });
       if (fetchedUsers) {
         setUsers(fetchedUsers);
       }
     };
 
     fetchUsers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const addUser = async (user: { username: string; password: string }) => {
     try {
-      const result = await registerUser(user.username, user.password);
+      const result = await apiCall({ method: "POST", route: "/users/register", payload: user });
       if (result) {
-        const fetchedUsers = await getUsers();
+        const fetchedUsers = await apiCall({ method: "GET", route: "/users" });
         if (fetchedUsers) {
           setUsers(fetchedUsers);
         }
@@ -47,9 +49,9 @@ const UserListContainer: React.FC = () => {
     }
 
     try {
-      const result = await deleteUser(user.id);
+      const result = await apiCall({ method: "DELETE", route: `/users/${user.id}` });
       if (result) {
-        const fetchedUsers = await getUsers();
+        const fetchedUsers = await apiCall({ method: "GET", route: "/users" });
         if (fetchedUsers) {
           setUsers(fetchedUsers);
         }

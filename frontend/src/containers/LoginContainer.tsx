@@ -1,8 +1,10 @@
+// ./containers/LoginContainer.tsx
+
 import React, { useState } from "react";
 import Login from "../components/Login";
-import { login } from "../auth";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "../contexts/ToastContext";
+import useApi from "../hooks/useApi";
 
 interface LoginContainerProps {
   setError: (error: string) => void;
@@ -16,6 +18,7 @@ const LoginContainer: React.FC<LoginContainerProps> = ({ setError, usernameError
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const { showToast } = useToast();
+  const { apiCall } = useApi();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -31,9 +34,14 @@ const LoginContainer: React.FC<LoginContainerProps> = ({ setError, usernameError
     }
 
     try {
-      const user = await login(username, password);
+      const user = await apiCall({
+        method: "POST",
+        route: "/users/login",
+        payload: { username, password }
+      });
 
       if (user) {
+        localStorage.setItem("token", user.token); // Assuming the token is returned in the user object
         navigate("/dashboard");
         showToast("Login Successful!");
       } else {

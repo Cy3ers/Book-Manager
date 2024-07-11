@@ -3,8 +3,8 @@
 import React, { useState } from "react";
 import PassChange from "../components/PassChange";
 import { useToast } from "../contexts/ToastContext";
-import { changePass } from "../api/authApi";
 import { logout } from "../auth";
+import useApi from "../hooks/useApi";
 
 const PassChangeContainer: React.FC = () => {
   const [oldPass, setOldPass] = useState("");
@@ -12,6 +12,7 @@ const PassChangeContainer: React.FC = () => {
   const [confirmPass, setConfirmPass] = useState("");
   const { showToast } = useToast();
   const [error, setError] = useState("");
+  const { apiCall } = useApi();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -23,7 +24,11 @@ const PassChangeContainer: React.FC = () => {
     }
 
     try {
-      const success = await changePass(oldPass, newPass, confirmPass);
+      const success = await apiCall({
+        method: "PATCH",
+        route: "/users/change-password",
+        payload: { oldPass, newPass, confirmPass }
+      });
 
       if (success) {
         showToast("Password changed successfully!");
@@ -37,6 +42,7 @@ const PassChangeContainer: React.FC = () => {
       setError("Failed to change password");
     }
   };
+
   return (
     <PassChange
       oldPass={oldPass}
