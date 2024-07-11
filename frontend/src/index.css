@@ -1,0 +1,208 @@
+/*  ./index.css  */
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #553055;
+}
+
+.App {
+  background: #4c2a4c;
+  margin: 20px auto;
+  width: 90%;
+  max-width: 700px;
+  color: #eee;
+}
+
+.navbar {
+  padding: 10px 20px;
+  text-align: center;
+  background: #6d3d6d;
+}
+
+.navbar h1 {
+  margin: 10px 0;
+}
+
+.li-header {
+  text-align: center;
+}
+
+.input-header {
+  margin-left: 20px;
+}
+
+.book-list {
+  margin: 20px;
+  padding-bottom: 20px;
+}
+
+.book-list ul {
+  padding: 0;
+  list-style-type: none;
+}
+
+.book-list li {
+  background: #6d3d6d;
+  border-radius: 4px;
+  padding: 10px;
+  margin: 10px 0;
+  position: relative;
+}
+
+.book-list .title {
+  font-weight: bold;
+  color: #fff;
+  font-size: 1.5em;
+}
+
+.book-list .description {
+  font-size: 1.2em;
+  color: #ddd;
+}
+
+.book-list .status {
+  font-size: 0.9em;
+  color: #ddd;
+  font-style: italic;
+}
+.book-list .priority {
+  font-size: 0.9em;
+  color: #ddd;
+  font-style: italic;
+}
+.book-list .status {
+  font-size: 0.9em;
+  color: #ddd;
+  font-style: italic;
+}
+
+.user-list ul {
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: left;
+}
+
+form {
+  padding: 20px;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  margin: 6px 0;
+  background: #3c1f3c;
+  color: #fff;
+  border: 0;
+}
+
+.dispatch-button,
+.logout-button,
+.submit-btn {
+  color: black;
+  cursor: pointer;
+  margin: 10px auto;
+  background: #fff;
+  opacity: 75%;
+  border: 0;
+  border-radius: 3px;
+  padding: 9px 35px;
+  display: block;
+  pointer-events: auto;
+}
+
+.nav-button {
+  color: black;
+  cursor: pointer;
+  margin: 5px 17px;
+  background: #fff;
+  opacity: 75%;
+  border: 0;
+  border-radius: 3px;
+  padding: 9px 35px;
+  display: inline;
+  pointer-events: auto;
+}
+
+.del-button {
+  color: black;
+  cursor: pointer;
+  margin: 5px auto;
+  background-color: #fff;
+  opacity: 75%;
+  border: 0;
+  border-radius: 3px;
+  padding: 5px 9px;
+  display: inline;
+}
+
+.add-button {
+  color: black;
+  cursor: pointer;
+  margin: 10px auto;
+  background: #fff;
+  opacity: 75%;
+  border: 0;
+  border-radius: 3px;
+  padding: 9px 35px;
+  display: block;
+  pointer-events: auto;
+}
+
+.add-button.disabled {
+  opacity: 50%;
+  cursor: none;
+  pointer-events: none;
+}
+
+.add-button:hover:not(.disable) {
+  transform: scale(1.005);
+  opacity: 100%;
+}
+
+.error-msg {
+  color: red;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  opacity: 0.9;
+  z-index: 1000;
+}
+
+.error-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.text-center {
+  text-align: center;
+}
+.text-5xl {
+  font-size: 3rem; /* Adjust the font size as needed */
+  font-weight: 600; /* Semi-bold */
+  color: #e3342f; /* Red-600 */
+  margin-bottom: 1rem; /* 4 units */
+}
+.text-2xl {
+  font-size: 1.5rem; /* Adjust the font size as needed */
+  font-weight: 600; /* Semi-bold */
+  color: #d1d5db; /* Gray-300 */
+}
+.mt-4 {
+  margin-top: 1rem; /* 4 units */
+}
