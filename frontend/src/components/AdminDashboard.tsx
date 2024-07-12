@@ -23,11 +23,9 @@ const AdminDashboard: React.FC = () => {
   }, []);
 
   const handleDeleteTask = async (id: number) => {
-    console.log("Before");
     await apiCall({ method: "DELETE", route: `/tasks/${id}` });
     fetchTasks();
     showToast("Task deleted successfully!");
-    console.log("After");
   };
   return (
     <div>

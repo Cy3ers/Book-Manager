@@ -18,7 +18,6 @@ const UserListContainer: React.FC = () => {
         setUsers(fetchedUsers);
       }
     };
-
     fetchUsers();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

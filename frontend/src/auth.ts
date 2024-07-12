@@ -13,7 +13,6 @@ export const login = async (username: string, password: string): Promise<User | 
     const user = await loginUser(username, password);
     if (user) {
       currentUser = user;
-      console.log(currentUser);
       return currentUser;
     } else {
       return null;
